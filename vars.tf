@@ -8,9 +8,9 @@ variable "eks_cluster_subnet_ids" {
   description = "List of subnets"
 }
 
-variable "elasticache_security_group_ids" {
+variable "redis_cidr_srcs" {
   type        = list(string)
-  description = "List of security group ids"
+  description = "List of src CIDRs having access to Redis"
 }
 
 variable "redis_port" {
