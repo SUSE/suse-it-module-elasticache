@@ -1,3 +1,14 @@
+variable "redis_instance_name" {
+  type        = string
+  description = "Redis instance name"
+}
+
+variable "redis_node_type" {
+  type        = string
+  description = "Redis node type"
+  default     = "cache.r6g.large"
+}
+
 variable "vpc_id" {
   type        = string
   description = "AWS VPC ID"
