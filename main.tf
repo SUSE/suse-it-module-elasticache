@@ -30,7 +30,7 @@ resource "aws_elasticache_replication_group" "redis-rep-group" {
   replication_group_id          = "redis-rep-group-${var.redis_instance_name}"
   replication_group_description = "Redis replication group"
   engine                        = "redis"
-  multi_az_enabled              = true
+#  multi_az_enabled              = true
   automatic_failover_enabled    = true
   at_rest_encryption_enabled    = true
   subnet_group_name             = aws_elasticache_subnet_group.subnet-redis.name
