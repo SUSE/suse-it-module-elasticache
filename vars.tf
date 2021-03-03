@@ -18,3 +18,13 @@ variable "redis_port" {
   default     = 6379
   description = "Port on which Redis accepts connections"
 }
+
+variable "redis_availability_zones" {
+  type        = list(string)
+  description = "List of Redis AZs"
+}
+
+variable "redis_cache_cluster_number" {
+  type        = number
+  description = "Number of Redis cache clusters"
+}
