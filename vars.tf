@@ -39,3 +39,13 @@ variable "redis_cache_cluster_number" {
   type        = number
   description = "Number of Redis cache clusters"
 }
+
+variable "redis_rest_encryption" {
+  type        = bool
+  descripton  = "Redis rest encryption on/off"
+}
+
+variable "redis_transit_encryption" {
+  type        = bool
+  description = "Redis transit encryption on/off"
+}

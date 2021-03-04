@@ -32,7 +32,8 @@ resource "aws_elasticache_replication_group" "redis-rep-group" {
   engine                        = "redis"
 #  multi_az_enabled              = true
   automatic_failover_enabled    = true
-  at_rest_encryption_enabled    = true
+  at_rest_encryption_enabled    = var.redis_rest_encryption
+  transit_encryption_enabled    = var.redis_transit_encryption
   subnet_group_name             = aws_elasticache_subnet_group.subnet-redis.name
   security_group_ids            = [aws_security_group.redis-sg.id]
   availability_zones            = var.redis_availability_zones
