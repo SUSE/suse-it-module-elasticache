@@ -42,7 +42,7 @@ variable "redis_cache_cluster_number" {
 
 variable "redis_rest_encryption" {
   type        = bool
-  descripton  = "Redis rest encryption on/off"
+  description = "Redis rest encryption on/off"
 }
 
 variable "redis_transit_encryption" {
