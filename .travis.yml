@@ -1,5 +1,5 @@
 os: linux
-dist: bionic
+dist: jammy
 arch: amd64
 language: bash
 sudo: true
@@ -7,29 +7,29 @@ before_install:
   - sudo .travis/requirements.sh
 jobs:
   include:
-  - stage: "Push Feature or Fix"
-    name: "Push Feature or Fix"
-    if: type IN (push) and ( branch =~ /^feature\/*/ or branch =~ /^fix\/*/ )
-    script:
-    - make install_requirements
-    - aws eks --region $AWS_REGION update-kubeconfig --name $EKS_CLUSTER_NAME
-    - make run_linter PATH_TO_LINT='.'
-    - make run_plan PATH_TO_PLAN='.travis/'
-  - stage: "Open Pull Request"
-    name: "Open Pull Request"
-    if: type IN (pull_request)
-    script:
-    - make install_requirements
-    - aws eks --region $AWS_REGION update-kubeconfig --name $EKS_CLUSTER_NAME
-    - make run_apply PATH_TO_APPLY='.travis/'
-    - make run_test
-    - make run_destroy PATH_TO_DESTROY='.travis/'
-  - stage: "Merging"
-    name: "Merging"
-    if: type IN (push) and branch = master
-    script:
-    - make install_requirements
-    - aws eks --region $AWS_REGION update-kubeconfig --name $EKS_CLUSTER_NAME
-    - make run_apply PATH_TO_APPLY='.travis/'
-    - make run_test
-    - make run_destroy PATH_TO_DESTROY='.travis/'
+    - stage: "Push Feature or Fix"
+      name: "Push Feature or Fix"
+      if: type IN (push) and ( branch =~ /^feature\/*/ or branch =~ /^fix\/*/ )
+      script:
+        - make install_requirements
+        - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region $AWS_REGION
+        - make run_linter PATH_TO_LINT='.'
+        - make run_plan PATH_TO_PLAN='.travis/'
+    - stage: "Open Pull Request"
+      name: "Open Pull Request"
+      if: type IN (pull_request)
+      script:
+        - make install_requirements
+        - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region $AWS_REGION
+        - make run_apply PATH_TO_APPLY='.travis/'
+        - make run_test
+        - make run_destroy PATH_TO_DESTROY='.travis/'
+    - stage: "Merging"
+      name: "Merging"
+      if: type IN (push) and branch = master
+      script:
+        - make install_requirements
+        - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region $AWS_REGION
+        - make run_apply PATH_TO_APPLY='.travis/'
+        - make run_test
+        - make run_destroy PATH_TO_DESTROY='.travis/'
