@@ -39,6 +39,6 @@ resource "aws_elasticache_replication_group" "redis-rep-group" {
   preferred_cache_cluster_azs = var.redis_availability_zones
   node_type                   = var.redis_node_type
   num_cache_clusters          = var.redis_cache_cluster_number
-  parameter_group_name        = "default.redis6.x"
-  port                        = var.redis_port
+  #parameter_group_name        = "default.redis6.x"
+  port = var.redis_port
 }
