@@ -27,18 +27,18 @@ resource "aws_security_group" "redis-sg" {
 }
 
 resource "aws_elasticache_replication_group" "redis-rep-group" {
-  replication_group_id          = "redis-rep-group-${var.redis_instance_name}"
-  replication_group_description = "Redis replication group"
-  engine                        = "redis"
-#  multi_az_enabled              = true
-  automatic_failover_enabled    = true
-  at_rest_encryption_enabled    = var.redis_rest_encryption
-  transit_encryption_enabled    = var.redis_transit_encryption
-  subnet_group_name             = aws_elasticache_subnet_group.subnet-redis.name
-  security_group_ids            = [aws_security_group.redis-sg.id]
-  availability_zones            = var.redis_availability_zones
-  node_type                     = var.redis_node_type
-  number_cache_clusters         = var.redis_cache_cluster_number
-  parameter_group_name          = "default.redis6.x"
-  port                          = var.redis_port
+  replication_group_id = "redis-rep-group-${var.redis_instance_name}"
+  description          = "Redis replication group"
+  engine               = "redis"
+  #  multi_az_enabled              = true
+  automatic_failover_enabled  = true
+  at_rest_encryption_enabled  = var.redis_rest_encryption
+  transit_encryption_enabled  = var.redis_transit_encryption
+  subnet_group_name           = aws_elasticache_subnet_group.subnet-redis.name
+  security_group_ids          = [aws_security_group.redis-sg.id]
+  preferred_cache_cluster_azs = var.redis_availability_zones
+  node_type                   = var.redis_node_type
+  num_cache_clusters          = var.redis_cache_cluster_number
+  parameter_group_name        = "default.redis6.x"
+  port                        = var.redis_port
 }
